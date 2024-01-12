@@ -1,0 +1,84 @@
+# 파일의 단어의 빈도수 구하기
+
+# alice.txt
+
+# 오로지 알파벳만 검사하기
+# 대소문자 구문없이 비교
+# 글자수 2개 이상인 단어만 카운트 하기
+# 빈도수 100회 이상인 단어만 카운트
+
+"""
+[출력예]
+the 1642
+and 872
+to 729
+it 595
+she 553
+of 514
+said 462
+you 411
+alice 398
+in 369
+...
+"""
+import string
+
+# with open('./alice.txt', 'r', encoding='utf-8') as file:
+#     liens = file.readlines()
+#     liens.upper()
+
+
+
+
+#     liens = [lien.split(sep='\n') for lien in liens]
+#     # liens = [lien.split(sep="'") for lien in liens]
+#     # liens = [lien.strip(sep='"') for lien in liens]
+#     # print(liens)
+#     word = []
+#     for i in liens:
+#         word.append(i)
+# print(word)
+# #
+# for word in liens:
+#
+
+# with open('./alice.txt', 'r', encoding='utf-8') as file:
+#     print(''.join(file.read()))
+
+# =======================================================================================================
+with open('./alice.txt', 'r', encoding='utf-8') as file:
+    content = file.read().lower()
+
+temp = []
+for character in content:
+    if 'a' <= character <= 'z':
+        temp.append(character)
+    else:
+        temp.append(" ")
+
+
+content = "".join(temp)
+
+words = [
+    word
+    for word in content.split()
+    if len(word) > 1
+]
+
+result = {}
+for word in words:
+    if result.get(word) is not None:
+        result[word] += 1
+
+    else:
+        result[word] = 1
+
+result = {
+    word: result[word]
+    for word in result
+    if result[word] >= 100
+}
+
+sorted_key = sorted(result, key=result.get, reverse=True)
+for key in sorted_key:
+    print(key, result[key])
