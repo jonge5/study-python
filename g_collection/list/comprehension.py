@@ -46,5 +46,3 @@ print(result_list)
 number_list = list(range(10))
 result_list = [i for i in range(10) if i % 3 == 0 and i != 0]
 print(result_list)
-
-
